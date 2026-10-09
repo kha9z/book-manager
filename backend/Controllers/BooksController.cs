@@ -20,6 +20,18 @@ public class BooksController : ControllerBase
         return Ok(books);
     }
 
+    [HttpGet( "{id}" )]
+    public IActionResult GetBook(int id)
+    {
+        var book = _context.Books.Find(id);
+
+        if(book == null)
+        {
+            return NotFound();
+        }
+            return Ok(book);
+    }
+
     [HttpPost]
     public IActionResult AddBook([FromBody] Book book)
     {

@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "backend": "cd backend && dotnet run"
+  }
+}
