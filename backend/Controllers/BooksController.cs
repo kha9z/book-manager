@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.Data;
+using backend.Models;
 
 namespace backend.Controllers;
 
@@ -17,5 +18,15 @@ public class BooksController : ControllerBase
     {
         var books = _context.Books.ToList();
         return Ok(books);
+    }
+
+    [HttpPost]
+    public IActionResult AddBook([FromBody] Book book)
+    {
+        book.Id = 0;
+
+        _context.Books.Add(book);
+        _context.SaveChanges();
+        return StatusCode(201, book);
     }
 }
