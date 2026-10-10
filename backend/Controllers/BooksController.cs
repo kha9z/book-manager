@@ -26,10 +26,8 @@ public class BooksController : ControllerBase
         var book = _context.Books.Find(id);
 
         if(book == null)
-        {
-            return NotFound();
-        }
-            return Ok(book);
+        { return NotFound();
+        } return Ok(book);
     }
 
     [HttpPost]
@@ -40,5 +38,21 @@ public class BooksController : ControllerBase
         _context.Books.Add(book);
         _context.SaveChanges();
         return StatusCode(201, book);
+    }
+
+    [HttpPut( "{id}" )]
+    public IActionResult UpdateBook(int id, [FromBody] Book updatedBook)
+    {
+        var book = _context.Books.Find(id);
+
+        if (book == null)
+        { return NotFound(); }
+
+        book.Title = updatedBook.Title;
+        book.Author = updatedBook.Author;
+        book.PublicationDate = updatedBook.PublicationDate;
+
+        _context.SaveChanges();
+        return Ok(book);
     }
 }

@@ -22,3 +22,8 @@ obj/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local SQLite database files
+*.db
+*.db-shm
+*.db-wal
