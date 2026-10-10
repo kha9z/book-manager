@@ -55,4 +55,17 @@ public class BooksController : ControllerBase
         _context.SaveChanges();
         return Ok(book);
     }
+
+    [HttpDelete( "{id}" )]
+    public IActionResult DeleteBook(int id)
+    {
+        var book = _context.Books.Find(id);
+
+        if (book == null)
+        { return NotFound(); }
+
+        _context.Books.Remove(book);
+        _context.SaveChanges();
+        return NoContent();
+    }
 }
